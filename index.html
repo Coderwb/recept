@@ -8,54 +8,79 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background-color: #e8f5e9; /* Ljusgrön bakgrund */
             color: #333;
             margin: 0;
             padding: 20px;
+            min-height: 100vh;
+            
+            /* Animerad blå och grön bakgrund */
+            background: linear-gradient(-45deg, #a8ff78, #78ffd6, #4e54c8, #8f94fb);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
         }
+
+        /* Bakgrunds-animationen */
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .recipe-container {
             max-width: 650px;
-            margin: 20px auto;
+            margin: 40px auto;
         }
+
         /* Flik-knappar */
         .tabs {
             display: flex;
             gap: 5px;
             margin-bottom: -2px;
+            flex-wrap: wrap;
         }
         .tab-button {
-            padding: 12px 24px;
+            padding: 12px 20px;
             cursor: pointer;
-            background: #c8e6c9;
-            border: 2px solid #a5d6a7;
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.5);
             border-bottom: none;
             border-radius: 8px 8px 0 0;
             font-weight: bold;
-            color: #2e7d32;
-            font-size: 1rem;
-            transition: background 0.2s;
+            color: #2c3e50;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px); /* Ger en snygg glaseffekt */
         }
         .tab-button:hover {
-            background: #a5d6a7;
+            background: rgba(255, 255, 255, 0.9);
         }
         .tab-button.active {
             background: #fff;
-            border-color: #a5d6a7;
+            border-color: #fff;
             border-bottom: 2px solid #fff;
             color: #1b5e20;
+            transform: translateY(-2px);
         }
+
         /* Receptkortet */
         .recipe-card {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 0 12px 12px 12px;
-            border: 2px solid #a5d6a7;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: none; /* Döljer alla kort som standard */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            display: none;
+            backdrop-filter: blur(10px);
         }
         .recipe-card.active {
-            display: block; /* Visar det aktiva kortet */
+            display: block;
         }
+
         h1 {
             color: #1b5e20;
             text-align: center;
@@ -64,9 +89,10 @@
         }
         .meta-info {
             text-align: center;
-            color: #666;
+            color: #555;
             font-size: 0.95rem;
             margin-bottom: 30px;
+            font-weight: 500;
         }
         h2 {
             border-bottom: 2px solid #edf2f7;
@@ -85,7 +111,7 @@
         }
         ul li {
             padding: 6px 0;
-            border-bottom: 1px dashed #e2e8f0;
+            border-bottom: 1px dashed #cbd5e1;
         }
         ol {
             padding-left: 20px;
@@ -106,6 +132,7 @@
     <div class="tabs">
         <button class="tab-button active" onclick="openRecipe(event, 'rulltarta')">Blåbärsrulltårta</button>
         <button class="tab-button" onclick="openRecipe(event, 'chokladbollar')">Chokladbollar</button>
+        <button class="tab-button" onclick="openRecipe(event, 'pannkakor')">Amerikanska pannkakor</button>
     </div>
 
     <!-- RECEPT 1: BLÅBÄRSRULLTÅRTA -->
@@ -172,26 +199,46 @@
             <li>Låt chokladbollarna stå i kylskåpet en stund så att de blir fasta före servering.</li>
         </ol>
     </div>
+
+    <!-- RECEPT 3: AMERIKANSKA PANNKAKOR -->
+    <div id="pannkakor" class="recipe-card">
+        <h1>Amerikanska Pannkakor</h1>
+        <div class="meta-info">Antal: ca 10-12 st | Tid: 20 min</div>
+        
+        <h2>Ingredienser</h2>
+        <ul>
+            <li><strong>2 ½ dl</strong> Vetemjöl</li>
+            <li><strong>2 tsk</strong> Bakpulver</li>
+            <li><strong>2 msk</strong> Strösocker</li>
+            <li><strong>½ tsk</strong> Salt</li>
+            <li><strong>2 ½ dl</strong> Mjölk</li>
+            <li><strong>1 st</strong> Ägg</li>
+            <li><strong>2 msk</strong> Smör (smällt, plus extra till stekning)</li>
+        </ul>
+
+        <h2>Gör så här</h2>
+        <ol>
+            <li>Blanda de torra ingredienserna (vetemjöl, bakpulver, socker och salt) i en bunke.</li>
+            <li>Vispa ihop mjölk, ägg och det smälta smöret i en annan skål.</li>
+            <li>Rör ner vätskan i mjölblandningen och vispa till en slät smet.</li>
+            <li>Klicka ut smeten i en varm stekpanna med lite smör. Varje pannkaka bör vara ungefär 8-10 cm i diameter.</li>
+            <li>Vänd pannkakorna när det börjar bildas små bubblor på ovansidan och stek tills de fått fin färg på båda sidor.</li>
+            <li>Serveras direkt, gärna med lönnsirap och färska bär!</li>
+        </ol>
+    </div>
 </div>
 
-<!-- Skript som sköter flikbytet när man klickar -->
 <script>
 function openRecipe(evt, recipeName) {
     var i, recipeCard, tabButton;
-    
-    // Dölj alla receptkort
     recipeCard = document.getElementsByClassName("recipe-card");
     for (i = 0; i < recipeCard.length; i++) {
         recipeCard[i].classList.remove("active");
     }
-    
-    // Ta bort "active"-klassen från alla knappar
     tabButton = document.getElementsByClassName("tab-button");
     for (i = 0; i < tabButton.length; i++) {
         tabButton[i].classList.remove("active");
     }
-    
-    // Visa det valda receptkortet och sätt knappen till active
     document.getElementById(recipeName).classList.add("active");
     evt.currentTarget.classList.add("active");
 }
