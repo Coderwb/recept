@@ -3,43 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blåbärsrulltårta - Recept</title>
+    <title>Mina Recept</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background-color: #f4f7f6;
+            background-color: #e8f5e9; /* Ljusgrön bakgrund */
             color: #333;
             margin: 0;
             padding: 20px;
         }
-        .recipe-card {
+        .recipe-container {
             max-width: 650px;
-            background: #fff;
             margin: 20px auto;
+        }
+        /* Flik-knappar */
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: -2px;
+        }
+        .tab-button {
+            padding: 12px 24px;
+            cursor: pointer;
+            background: #c8e6c9;
+            border: 2px solid #a5d6a7;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .tab-button:hover {
+            background: #a5d6a7;
+        }
+        .tab-button.active {
+            background: #fff;
+            border-color: #a5d6a7;
+            border-bottom: 2px solid #fff;
+            color: #1b5e20;
+        }
+        /* Receptkortet */
+        .recipe-card {
+            background: #fff;
             padding: 30px;
-            border-radius: 12px;
+            border-radius: 0 12px 12px 12px;
+            border: 2px solid #a5d6a7;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: none; /* Döljer alla kort som standard */
+        }
+        .recipe-card.active {
+            display: block; /* Visar det aktiva kortet */
         }
         h1 {
-            color: #2c3e50;
+            color: #1b5e20;
             text-align: center;
+            margin-top: 10px;
             margin-bottom: 5px;
         }
         .meta-info {
             text-align: center;
-            color: #7f8c8d;
+            color: #666;
             font-size: 0.95rem;
             margin-bottom: 30px;
         }
         h2 {
             border-bottom: 2px solid #edf2f7;
             padding-bottom: 8px;
-            color: #34495e;
+            color: #2e7d32;
             margin-top: 25px;
         }
         h3 {
-            color: #2c3e50;
+            color: #1b5e20;
             font-size: 1.1rem;
             margin-bottom: 5px;
         }
@@ -65,12 +101,19 @@
 </head>
 <body>
 
-    <div class="recipe-card">
+<div class="recipe-container">
+    <!-- Flikarna man klickar på -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="openRecipe(event, 'rulltarta')">Blåbärsrulltårta</button>
+        <button class="tab-button" onclick="openRecipe(event, 'chokladbollar')">Chokladbollar</button>
+    </div>
+
+    <!-- RECEPT 1: BLÅBÄRSRULLTÅRTA -->
+    <div id="rulltarta" class="recipe-card active">
         <h1>Blåbärsrulltårta</h1>
         <div class="meta-info">Antal: 10 bitar | Tid: ca 60 min</div>
         
         <h2>Ingredienser</h2>
-        
         <div class="section">
             <h3>Rulltårtebotten</h3>
             <ul>
@@ -81,7 +124,6 @@
                 <li><strong>1 msk</strong> Vatten</li>
             </ul>
         </div>
-
         <div class="section">
             <h3>Fyllning & Garnering</h3>
             <ul>
@@ -89,7 +131,7 @@
                 <li><strong>1 ½ dl</strong> Vispgrädde</li>
                 <li><strong>½ dl</strong> Florsocker</li>
                 <li><strong>1 msk</strong> Vaniljsocker</li>
-                <li><strong>2 dl</strong> Blåbär (plus lite extra till dekorering)</li>
+                <li><strong>2 dl</strong> Blåbär</li>
             </ul>
         </div>
 
@@ -97,13 +139,63 @@
         <ol>
             <li>Sätt på ugnen på 250°.</li>
             <li>Vispa ägg och socker väldigt ljust. Blanda mjöl med bakpulver, vispa ner det i smeten blandat med vatten.</li>
-            <li>Lägg bakplåtspapper i en stor panna, 30x40 cm. Bred ut smeten jämt. Grädda längst ner i ugnen i ca 5 minuter.</li>
+            <li>Lägg bakplåtspapper i en stor panna, 30x40 cm. Bred ut smeten jämnt. Grädda längst ner i ugnen i ca 5 minuter.</li>
             <li>Vänd över botten på ett annat bakplåtspapper. Ta av pappret som botten bakats på, låt den svalna under en handduk.</li>
             <li>Blanda färskost, vispgrädde, florsocker och vaniljsocker i en bunke. Vispa väldigt fluffigt.</li>
-            <li>Fördelar 3/4 av fyllningen över hela rulltårtebotten, lägg på blåbär och rulla ihop till en rulltårta med skarven nedåt.</li>
+            <li>Fördela 3/4 av fyllningen över hela rulltårtebotten, lägg på blåbär och rulla ihop till en rulltårta med skarven nedåt.</li>
             <li>Dekorera med resten av fyllningen och lite extra blåbär.</li>
         </ol>
     </div>
+
+    <!-- RECEPT 2: CHOKLADBOLLAR -->
+    <div id="chokladbollar" class="recipe-card">
+        <h1>Klassiska Chokladbollar</h1>
+        <div class="meta-info">Antal: ca 20 st | Tid: 15 min</div>
+        
+        <h2>Ingredienser</h2>
+        <ul>
+            <li><strong>100 g</strong> Smör (rumsvarmt)</li>
+            <li><strong>1 dl</strong> Strösocker</li>
+            <li><strong>3 dl</strong> Havregryn</li>
+            <li><strong>3 msk</strong> Kakao</li>
+            <li><strong>1 tsk</strong> Vaniljsocker</li>
+            <li><strong>2 msk</strong> Kallt kaffe (eller vatten)</li>
+            <li><strong>Garnering:</strong> Pärlsocker eller kokosflingor</li>
+        </ul>
+
+        <h2>Gör så här</h2>
+        <ol>
+            <li>Blanda rumsvarmt smör och strösocker i en bunke.</li>
+            <li>Tillsätt havregryn, kakao, vaniljsocker och kaffe. Arbeta ihop till en jämn smet med händerna eller en sked.</li>
+            <li>Forma smeten till runda, fina bollar.</li>
+            <li>Rulla bollarna i pärlsocker eller kokosflingor.</li>
+            <li>Låt chokladbollarna stå i kylskåpet en stund så att de blir fasta före servering.</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Skript som sköter flikbytet när man klickar -->
+<script>
+function openRecipe(evt, recipeName) {
+    var i, recipeCard, tabButton;
+    
+    // Dölj alla receptkort
+    recipeCard = document.getElementsByClassName("recipe-card");
+    for (i = 0; i < recipeCard.length; i++) {
+        recipeCard[i].classList.remove("active");
+    }
+    
+    // Ta bort "active"-klassen från alla knappar
+    tabButton = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tabButton.length; i++) {
+        tabButton[i].classList.remove("active");
+    }
+    
+    // Visa det valda receptkortet och sätt knappen till active
+    document.getElementById(recipeName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
+</script>
 
 </body>
 </html>
