@@ -5,47 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mina Recept</title>
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden; 
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            margin: 0;
-            padding: 20px;
+            padding: 15px;
             min-height: 100vh;
-            
-            /* Animerad blå och grön bakgrund */
             background: linear-gradient(-45deg, #a8ff78, #78ffd6, #4e54c8, #8f94fb);
             background-size: 400% 400%;
             animation: gradientAnimation 15s ease infinite;
         }
 
-        /* Bakgrunds-animationen */
         @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .recipe-container {
             max-width: 650px;
-            margin: 40px auto;
+            width: 100%;
+            margin: 20px auto;
         }
 
-        /* Flik-knappar */
         .tabs {
             display: flex;
-            gap: 5px;
+            gap: 4px;
             margin-bottom: -2px;
             flex-wrap: wrap;
         }
+
         .tab-button {
-            padding: 12px 20px;
+            padding: 10px 12px;
             cursor: pointer;
             background: rgba(255, 255, 255, 0.7);
             border: 2px solid rgba(255, 255, 255, 0.5);
@@ -53,30 +55,40 @@
             border-radius: 8px 8px 0 0;
             font-weight: bold;
             color: #2c3e50;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px); /* Ger en snygg glaseffekt */
+            font-size: 0.9rem;
+            flex: 1 1 auto;
+            text-align: center;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
         }
+
         .tab-button:hover {
             background: rgba(255, 255, 255, 0.9);
         }
+
         .tab-button.active {
             background: #fff;
             border-color: #fff;
             border-bottom: 2px solid #fff;
             color: #1b5e20;
-            transform: translateY(-2px);
         }
 
-        /* Receptkortet */
         .recipe-card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
+            padding: 20px;
             border-radius: 0 12px 12px 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             display: none;
             backdrop-filter: blur(10px);
+            width: 100%;
         }
+
+        @media (min-width: 480px) {
+            .recipe-card {
+                padding: 30px;
+            }
+        }
+
         .recipe-card.active {
             display: block;
         }
@@ -84,42 +96,54 @@
         h1 {
             color: #1b5e20;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 5px;
             margin-bottom: 5px;
+            font-size: 1.7rem;
         }
+
         .meta-info {
             text-align: center;
             color: #555;
             font-size: 0.95rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-weight: 500;
         }
+
         h2 {
             border-bottom: 2px solid #edf2f7;
             padding-bottom: 8px;
             color: #2e7d32;
             margin-top: 25px;
+            font-size: 1.3rem;
         }
+
         h3 {
             color: #1b5e20;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin-bottom: 5px;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
+            margin: 0 0 20px 0;
         }
+
         ul li {
             padding: 6px 0;
             border-bottom: 1px dashed #cbd5e1;
         }
+
         ol {
             padding-left: 20px;
+            margin: 0;
         }
+
         ol li {
             margin-bottom: 12px;
-            padding-left: 5px;
+            padding-left: 3px;
         }
+
         .section {
             margin-bottom: 20px;
         }
@@ -128,11 +152,11 @@
 <body>
 
 <div class="recipe-container">
-    <!-- Flikarna man klickar på -->
     <div class="tabs">
         <button class="tab-button active" onclick="openRecipe(event, 'rulltarta')">Blåbärsrulltårta</button>
         <button class="tab-button" onclick="openRecipe(event, 'chokladbollar')">Chokladbollar</button>
         <button class="tab-button" onclick="openRecipe(event, 'pannkakor')">Amerikanska pannkakor</button>
+        <button class="tab-button" onclick="openRecipe(event, 'daimtarta')">Daimtårta</button>
     </div>
 
     <!-- RECEPT 1: BLÅBÄRSRULLTÅRTA -->
@@ -213,12 +237,12 @@
             <li><strong>½ tsk</strong> Salt</li>
             <li><strong>2 ½ dl</strong> Mjölk</li>
             <li><strong>1 st</strong> Ägg</li>
-            <li><strong>2 msk</strong> Smör (smällt, plus extra till stekning)</li>
+            <li><strong>2 msk</strong> Smör (smält, plus extra till stekning)</li>
         </ul>
 
         <h2>Gör så här</h2>
         <ol>
-            <li>Blanda de torra ingredienserna (vetemjöl, bakpulver, socker och salt) i en bunke.</li>
+            <li>Blanda de torra ingredienserna (vetemjöl, bakpulver, socker and salt) i en bunke.</li>
             <li>Vispa ihop mjölk, ägg och det smälta smöret i en annan skål.</li>
             <li>Rör ner vätskan i mjölblandningen och vispa till en slät smet.</li>
             <li>Klicka ut smeten i en varm stekpanna med lite smör. Varje pannkaka bör vara ungefär 8-10 cm i diameter.</li>
@@ -226,23 +250,41 @@
             <li>Serveras direkt, gärna med lönnsirap och färska bär!</li>
         </ol>
     </div>
-</div>
 
-<script>
-function openRecipe(evt, recipeName) {
-    var i, recipeCard, tabButton;
-    recipeCard = document.getElementsByClassName("recipe-card");
-    for (i = 0; i < recipeCard.length; i++) {
-        recipeCard[i].classList.remove("active");
-    }
-    tabButton = document.getElementsByClassName("tab-button");
-    for (i = 0; i < tabButton.length; i++) {
-        tabButton[i].classList.remove("active");
-    }
-    document.getElementById(recipeName).classList.add("active");
-    evt.currentTarget.classList.add("active");
-}
-</script>
+    <!-- RECEPT 4: DAIMTÅRTA -->
+    <div id="daimtarta" class="recipe-card">
+        <h1>Daimtårta</h1>
+        <div class="meta-info">Typ: Dessert | Form: ca 23 cm i diameter</div>
+        
+        <h2>Ingredienser</h2>
+        <div class="section">
+            <h3>Botten</h3>
+            <ul>
+                <li><strong>2 dl</strong> Mandlar</li>
+                <li><strong>3 st</strong> Äggvitor (spara gulorna till fyllningen)</li>
+                <li><strong>1 ½ dl</strong> Strösocker</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Fyllning</h3>
+            <ul>
+                <li><strong>3 st</strong> Äggulor</li>
+                <li><strong>½ dl</strong> Mjölk</li>
+                <li><strong>2 msk</strong> Strösocker</li>
+                <li><strong>2 tsk</strong> Vaniljsocker</li>
+                <li><strong>50 g</strong> Mörk choklad</li>
+                <li><strong>100 g</strong> Smör (rumstempererat)</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Garnering</h3>
+            <ul>
+                <li><strong>100 g</strong> Krossad daim</li>
+                <li><strong>3 dl</strong> Vispgrädde</li>
+                <li><strong>3 dl</strong> Färska bär (t.ex. jordgubbar, blåbär, hallon, körsbär, björnbär)</li>
+            </ul>
+        </div>
 
-</body>
-</html>
+        <h2>Gör så här</h2>
+        <ol>
+            Mal mandeln. Vispa äggvitorna, tillsätt sockret lite i taget under fortsatt vispning till ett tjockt blankt skum.Vänd ner mandeln och häll smeten i en smord och bröad springform, ca 23 cm i diam. Grädda i 150° i ca 30 min tills den precis stannat och fått lite färg. Låt svalna.Blanda äggulor, mjölk, strösocker och vaniljsocker i en kastrull. Sjud tills det blir en tjock kräm. Dra kastrullen från värmen, rör ner chokladen och låt allt smälta. Låt svalna. Rör ner smöret i klickar.Fördela chokladkrämen i formen. Strö på hälften av daimkrosset.Frys tårtan fram till servering, ta ut den och lägg på fat. Spritsa vispad grädde runt kanten och lägg bär i mitten. Strö över resterande daimkross. Låt tårtan stå framme minst 30 min före servering.function openRecipe(evt, recipeName) {var i, recipeCard, tabButton;recipeCard = document.getElementsByClassName("recipe-card");for (i = 0; i < recipeCard.length; i++) {recipeCard[i].style.display = "none";}tabButton = document.getElementsByClassName("tab-button");for (i = 0; i < tabButton.length; i++) {tabButton[i].className = tabButton[i].className.replace(" active", "");}document.getElementById(recipeName).style.display = "block";evt.currentTarget.className += " active";}{content: }
